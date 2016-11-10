@@ -560,45 +560,47 @@ RN2xx3_t rn2xx3::moduleType()
 
 void rn2xx3::configureTTNEU868() {
 
-  uint8_t ch;
-  int8_t dr = -1;
-  uint32_t freq = 867100000;
-  String str = "";
-
-  str.concat(F("mac set rx2 3 869525000"));
-  sendRawCommand(str);
-  str = "";
-  for (ch = 0; ch <= 7; ch++) {
-    if (ch >= 3) {
-      str.concat(F("mac set ch freq "));
-      str.concat(ch);
-      str.concat(F(" "));
-      str.concat(freq);
-      sendRawCommand(str);
-
-      str = "";
-      str.concat(F("mac set ch drrange "));
-      str.concat(ch);
-      str.concat(F(" 0 5"));
-      sendRawCommand(str);
-
-      str = "";
-      str.concat(F("mac set ch status "));
-      str.concat(ch);
-      str.concat(F(" on"));
-      sendRawCommand(str);
-      str = "";
-      freq = freq + 200000;
-    }
-    str.concat(F("mac set ch dcycle "));
-    str.concat(ch);
-    str.concat(F(" 799"));
-    sendRawCommand(str);
-    str = "";
-  }
-  str.concat(F("mac set ch drrange 1 0 6"));
-  sendRawCommand(str);
-
+  sendRawCommand(F("mac set rx2 3 869525000")); //RX window 2
+  
+  //channel 0
+  sendRawCommand(F("mac set ch dcycle 0 799"));
+  
+  //channel 1
+  sendRawCommand(F("mac set ch drrange 1 0 6"));
+  sendRawCommand(F("mac set ch dcycle 1 799"));
+  
+  //channel 2
+  sendRawCommand(F("mac set ch dcycle 2 799"));
+  
+  //channel 3
+  sendRawCommand(F("mac set ch freq 3 867100000"));
+  sendRawCommand(F("mac set ch drrange 3 0 5"));
+  sendRawCommand(F("mac set ch status 3 on"));
+  sendRawCommand(F("mac set ch dcycle 3 799"));
+  
+  //channel 4
+  sendRawCommand(F("mac set ch freq 4 867300000"));
+  sendRawCommand(F("mac set ch drrange 4 0 5"));
+  sendRawCommand(F("mac set ch status 4 on"));
+  sendRawCommand(F("mac set ch dcycle 4 799"));
+  
+  //channel 5
+  sendRawCommand(F("mac set ch freq 5 867500000"));
+  sendRawCommand(F("mac set ch drrange 5 0 5"));
+  sendRawCommand(F("mac set ch status 5 on"));
+  sendRawCommand(F("mac set ch dcycle 5 799"));
+  
+  //channel 6
+  sendRawCommand(F("mac set ch freq 6 867700000"));
+  sendRawCommand(F("mac set ch drrange 6 0 5"));
+  sendRawCommand(F("mac set ch status 6 on"));
+  sendRawCommand(F("mac set ch dcycle 6 799"));
+  
+  //channel 7
+  sendRawCommand(F("mac set ch freq 7 867900000"));
+  sendRawCommand(F("mac set ch drrange 7 0 5"));
+  sendRawCommand(F("mac set ch status 7 on"));
+  sendRawCommand(F("mac set ch dcycle 7 799"));
 
 }
 
